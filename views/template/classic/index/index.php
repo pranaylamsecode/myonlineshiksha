@@ -1,0 +1,127 @@
+<script type="text/javascript">
+$(window).resize(function() 
+{
+  if($(window).width() < 980)
+  {
+    $('.screenres').removeClass("row-fluid");  
+  }
+  else
+  {
+    $('.screenres').addClass("row-fluid");
+  }
+});
+</script>
+<style type="text/css">
+  .morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
+</style>
+<?php 
+// echo"<pre>";
+// print_r($programs);
+// echo"</pre>";
+
+$CI =& get_instance();
+$CI->load->model('admin/settings_model');
+
+$currency = $this->settings_model->getItems();
+    $currencysign = $this->settings_model->getCurrenciesign($currency[0]['currency']);
+    if($currencysign)
+    {
+      $currency_symbol = $currencysign->sign;
+    }
+    else
+    {
+    $currency_symbol = " "; 
+    }
+
+$getItemssetting = $CI->settings_model->getItems();
+$callpages = $CI->settings_model->getAllPages();
+
+$countpage = count($callpages);
+$currenttemplate = $getItemssetting[0]['layout_template'];
+$settings = $CI->settings_model->getTemplateById($currenttemplate);
+$data11 = $settings[0]['options'];
+$data = json_decode($data11);
+
+$totalcourse = @$data->total_course;
+$countCourse = 1;
+$programs = @$data->qidck;
+$divstart1 = 0;
+if(!empty($programs))
+{
+foreach($programs as $key => $program){
+
+
+
+    $prodata = $this->Category_model->getChoosedProgram($program);
+  if($prodata)
+  {
+
+  	?>
+	<?php
+	if($divstart1 == 0)
+  {    
+    ?>
+    <div class='screenres row-fluid' >
+    <?php   
+  }
+  ?>
+<div class="span4">
+	<div class="item">
+    	<div class="ch-item ch-img-1 thumb" style="background-image: url('<?php echo base_url(); ?>public/uploads/programs/img/thumbs/<?php echo trim($prodata[0]->image);?>');  background-repeat: no-repeat;">
+					<?php
+						$urlCourse = strtolower($prodata[0]->name);			
+						$urlCourse = trim(str_replace(' ', '-', $urlCourse));
+						$urlCourse = preg_replace('/[^A-Za-z0-9\-]/', '', $urlCourse);
+					?>
+<div class="ch-info">
+<p style=""><a href="<?php echo base_url(); ?>course/<?php echo $urlCourse ?>/<?php echo $prodata[0]->pid;?>">Read more </a></p>
+</div>
+</div>
+		<p style="font-size: 22px; font-weight:100; line-height:25px;"><a href="<?php echo base_url(); ?>course/<?php echo $urlCourse ?>/<?php echo $prodata[0]->pid;?>"><?php echo $prodata[0]->name;  ?></a></h4>
+<p><?php echo character_limiter(strip_tags($prodata[0]->description),70); ?></p>
+        <?php  $pricerate = $this->Category_model->getFeaturedProgramprice($prodata[0]->pid); ?>
+        <?php
+if($pricerate)
+{
+?>
+<p style="text-align:center;"><strong style="font-size:18px; text-transform:uppercase; font-weight: 600;">Price :</strong>&nbsp;<span class="price" style="color: #54b551;font-size: 20px;font-weight: normal;margin-top: 5px;"><?php echo $pricerate && $pricerate->price !='0' ? $currency_symbol.$pricerate->price :'FREE';  ?> </span></p>
+<!-- <a href="<?php echo base_url(); ?>programs/programs/<?php echo $program->pid;?>" class="btn">Read More </a> -->
+<?php
+}
+else
+{	
+?>
+
+<p style="text-align:center;"><strong style="font-size:18px; text-transform:uppercase; font-weight: 600;">Price :</strong>&nbsp;<span class="price" style="color: #54b551;font-size: 20px;font-weight: normal;margin-top: 5px;"><?php echo $prodata[0]->fixedrate && $prodata[0]->fixedrate != '0.00' ? $currency_symbol.$prodata[0]->fixedrate :'FREE';  ?> </span></p>
+<?php
+}
+$divstart1 = 1;
+?>
+<a href="<?php echo base_url(); ?>course/<?php echo $urlCourse ?>/<?php echo $prodata[0]->pid;?>" class="btn">Read More </a>
+	</div>
+</div>
+<?php
+  if(($key+1) % 3 == 0)
+  {
+
+    ?>
+    </div>
+    <?php
+    $divstart1 = 0;
+  }
+  ?>
+<?php 
+      }  
+      if($totalcourse == $countCourse)
+      {
+        break;
+      }
+      $countCourse++;
+    }  
+  } ?>
+

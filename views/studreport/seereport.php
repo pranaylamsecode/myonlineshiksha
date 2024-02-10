@@ -1,0 +1,802 @@
+<style type="text/css">
+.table {
+	font-size:14px;
+}
+.text-center {
+    text-align: center !important;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+	font-weight: bold;
+	color: #303641;
+}
+}
+</style>
+
+<script type="text/javascript" src="<?php echo base_url(); ?>/public/js/jquery.mousewheel-3.0.6.pack.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/public/lightbox/jquery.fancybox.css?v=2.1.4" media="screen" />-->
+<script type="text/javascript" src="<?php echo base_url();?>public/js/programs.js"></script>
+<!--<script type="text/javascript" src="<?php echo base_url(); ?>/public/lightbox/jquery.fancybox.js?v=2.1.4"></script>-->
+<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			/*
+
+			 *  Simple image gallery. Uses default settings
+
+			 */
+
+
+
+			$('.fancybox').fancybox();
+
+
+
+			/*
+
+			 *  Different effects
+
+			 */
+
+
+
+			// Change title type, overlay closing speed
+
+			$(".fancybox-effects-a").fancybox({
+
+				helpers: {
+
+					title : {
+
+						type : 'outside'
+
+					},
+
+					overlay : {
+
+						speedOut : 0
+
+					}
+
+				}
+
+			});
+
+
+
+			// Disable opening and closing animations, change title type
+
+			$(".fancybox-effects-b").fancybox({
+
+				openEffect  : 'none',
+
+				closeEffect	: 'none',
+
+
+
+				helpers : {
+
+					title : {
+
+						type : 'over'
+
+					}
+
+				}
+
+			});
+
+
+
+			// Set custom style, close if clicked, change title type and overlay color
+
+			$(".fancybox-effects-c").fancybox({
+
+				wrapCSS    : 'fancybox-custom',
+
+				closeClick : true,
+
+
+
+				openEffect : 'none',
+
+
+
+				helpers : {
+
+					title : {
+
+						type : 'inside'
+
+					},
+
+					overlay : {
+
+						css : {
+
+							'background' : 'rgba(238,238,238,0.85)'
+
+						}
+
+					}
+
+				}
+
+			});
+
+
+
+			// Remove padding, set opening and closing animations, close if clicked and disable overlay
+
+			$(".fancybox-effects-d").fancybox({
+
+				padding: 0,
+
+
+
+				openEffect : 'elastic',
+
+				openSpeed  : 150,
+
+
+
+				closeEffect : 'elastic',
+
+				closeSpeed  : 150,
+
+
+
+				closeClick : true,
+
+
+
+				helpers : {
+
+					overlay : null
+
+				}
+
+			});
+
+
+
+			/*
+
+			 *  Button helper. Disable animations, hide close button, change title type and content
+
+			 */
+
+
+
+			$('.fancybox-buttons').fancybox({
+
+				openEffect  : 'none',
+
+				closeEffect : 'none',
+
+
+
+				prevEffect : 'none',
+
+				nextEffect : 'none',
+
+
+
+				closeBtn  : false,
+
+
+
+				helpers : {
+
+					title : {
+
+						type : 'inside'
+
+					},
+
+					buttons	: {}
+
+				},
+
+
+
+				afterLoad : function() {
+
+					this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+
+				}
+
+			});
+
+
+
+
+
+			/*
+
+			 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+
+			 */
+
+
+
+			$('.fancybox-thumbs').fancybox({
+
+				prevEffect : 'none',
+
+				nextEffect : 'none',
+
+
+
+				closeBtn  : false,
+
+				arrows    : false,
+
+				nextClick : true,
+
+
+
+				helpers : {
+
+					thumbs : {
+
+						width  : 50,
+
+						height : 50
+
+					}
+
+				}
+
+			});
+
+
+
+			/*
+
+			 *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+
+			*/
+
+			$('.fancybox-media')
+
+				.attr('rel', 'media-gallery')
+
+				.fancybox({
+
+					openEffect : 'none',
+
+					closeEffect : 'none',
+
+					prevEffect : 'none',
+
+					nextEffect : 'none',
+
+
+
+					arrows : false,
+
+					helpers : {
+
+						media : {},
+
+						buttons : {}
+
+					}
+
+				});
+
+
+
+			/*
+
+			 *  Open manually
+
+			 */
+
+
+
+			$("#fancybox-manual-a").click(function() {
+
+				$.fancybox.open('1_b.jpg');
+
+			});
+
+
+
+			$("#fancybox-manual-b").click(function() {
+
+				$.fancybox.open({
+
+					href : 'iframe.html',
+
+					type : 'iframe',
+
+					padding : 5
+
+				});
+
+			});
+
+
+
+			$("#fancybox-manual-c").click(function() {
+
+				$.fancybox.open([
+
+					{
+
+						href : '1_b.jpg',
+
+						title : 'My title'
+
+					}, {
+
+						href : '2_b.jpg',
+
+						title : '2nd title'
+
+					}, {
+
+						href : '3_b.jpg'
+
+					}
+
+				], {
+
+					helpers : {
+
+						thumbs : {
+
+							width: 75,
+
+							height: 50
+
+						}
+
+					}
+
+				});
+
+			});
+
+
+
+
+
+		});
+
+	</script>
+
+	
+<!--/lightbox scripts and style-->
+<!-- Fancy Box End -->
+
+<?php 
+$this->load->model('admin/programs_model');
+$certidetailarr=array('1'=>'No Certificate','2'=>'Complete all the lessons','3'=>'Pass the Final exam','4'=>'Pass The Exams In Average','5'=>'Finish All Lessons And Pass Final Exam','6'=>'Finish All Lessons And Pass Exams In Average');
+?>
+
+
+<header>
+    <section class="breadcrumb">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">         
+<span class="page-title">Report Manager</span>
+<div class="bread-view">
+		<a href="<?php echo base_url;?>"><i class="entypo-home"></i></a>		
+		<span class="ng-hide">/ </span>
+		<a href="<?php echo base_url();?>student-course-report/<?php echo $this->uri->segment(2);?>/<?php echo $this->uri->segment(3);?>/<?php echo $this->uri->segment(4);?>">Report Manager</a>
+	</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<div class="clearfix"></div>
+
+
+<div class="page-container">
+  <div style="background-color: #F5F5F5; display:-webkit-box;">
+    
+    <div class="sidebar-menu sb-left"> 
+     
+      <ul id="main-menu">
+        <li class="root-level"><a href="<?php echo base_url(); ?>courses-manage"><span>My Courses</span></a></li>
+        <li class="root-level"><a href="<?php echo base_url(); ?>manage-exams"><span>My Exams</span></a></li>
+        <li class="root-level"><a href="<?php echo base_url(); ?>course-media-category/manage"><span>Media Category</span></a></li>
+        <li class="root-level"><a href="<?php echo base_url(); ?>course-media/manage"><span>Media Library</span></a></li>
+      </ul>
+    </div>
+
+<!--This is your Container-->
+    <div class="main-content">
+      <div class="row">
+        <div class="sidebar-collapse sb-toggle-left" style="float: left; margin-top: 0px;"> <a href="#" class="sidebar-collapse-icon with-animation"> 
+          <!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition --> 
+          <i class="entypo-menu"></i> </a> </div>
+
+<h4 style="text-align: center;"><?php echo $courseinfo->name;?></h4>
+
+<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th colspan=2 class="text-center" style="font-size:16px"><b>User Details</b></th>
+			</tr>
+		</thead>		
+		<tbody>
+			<tr>
+				<td class="text-center">User ID</td>
+				<td><?php echo $userinfo->id; ?></td>
+			</tr>			
+			<tr>
+				<td class="text-center">User Name</td>
+				<td><?php echo $userinfo->username; ?></td>				
+			</tr>			
+			<tr>
+				<td class="text-center">Name of Student</td>
+				<td><?php echo $userinfo->first_name .' '. $userinfo->last_name; ?></td>				
+			</tr>			
+			<tr>
+				<td class="text-center">Email</td>
+				<td><?php echo $userinfo->email; ?></td>				
+			</tr>			
+		</tbody>
+</table>
+
+<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th colspan=2 class="text-center" style="font-size:16px;"><b>Course Details</b></th>
+			</tr>
+		</thead>		
+		<tbody>
+			<tr>
+				<td class="text-center">Course ID</td>
+				<td><?php echo $courseinfo->id; ?></td>
+			</tr>			
+			<tr>
+				<td class="text-center">Trainer</td>
+				<td><?php echo (($courseinfo->author)?$this->programs_model->getUserName($courseinfo->author):'');?></td>				
+			</tr>			
+			<tr>
+				<td class="text-center">Course has Final Exam</td>
+				<td><?php echo (($courseinfo->id_final_exam)?'Yes':'No');?></td>				
+			</tr>			
+			<tr>
+				<td class="text-center">Course has Certificate</td>
+				<td><?php echo (($courseinfo->certificate_term=='1')?'No':'Yes');?></td>				
+			</tr>			
+		</tbody>
+</table>
+
+<table class="table table-bordered">
+        <?php
+        	if($courseinfo->id_final_exam)
+        	{
+        ?>
+		<thead>
+			<tr>
+				<th colspan=8 class="text-center" style="font-size:16px;"><b>Exam Details</b></th>
+			</tr>
+		</thead>		
+		<tbody>
+			<tr>
+				<td colspan=3 class="text-center">Final Exam Completed</td>
+				<td colspan=5><?php echo (intval($finalexamcomplete) > 0) ? 'Yes' : 'No'; ?></td>
+			</tr>	
+		</tbody>
+		<?php
+			}
+		?>
+
+		<thead>
+			<tr>
+				<th class="text-center">Exam Name</th>
+				<th class="text-center">Pass Marks(%)</th>
+				<th class="text-center">Marks Secured(%)</th>
+				<th class="text-center">Result</th>
+				<th class="text-center">Exam taken On</th>
+				<th class="text-center">Access Exam</th>
+				<th class="text-center">Fool Proof Records</th>
+				<th class="text-center">Archive</th>
+
+			</tr>
+		</thead>	
+		
+		<tbody>
+		<?php 		
+         
+        // echo '<pre>';
+//print_r($quizinformation);
+        if($quizinformation)
+        {
+		foreach($quizinformation as $quizzz)
+        {
+
+		?>
+			<tr>
+				<td><?php
+							$quizrept = $this->programs_model->getQuiz($quizzz->quiz_id);		
+							echo ucfirst($quizrept->name);
+						?></td>				
+				<td><?php echo $maxscore=$this->programs_model->getQuizMaxScoreById($quizzz->quiz_id);?></td>
+				<td><?php 
+                          if($quizzz->score_quiz)
+                          {
+							$first= explode("|", @$quizzz->score_quiz);
+			                    echo @$res = intval(($first[0]/$first[1])*100); 
+
+			                           @$total_prcnt[] = $first[0];
+			                           @$out_of[] = $first[1];
+			               }
+			               else
+			               {
+			               	  echo '';
+			               }
+
+			                   ?>
+                 </td>
+				<?php
+					if($quizzz->result == 'Pending')
+					{
+						$user = $this->uri->segment(3);
+						$program = $this->uri->segment(4);
+						$quiz = $quizzz->quiz_id;
+						$attempt = $quizzz->attempt_no;
+						?>
+						<td><a href='<?php echo base_url(); ?>studreport/pendings/<?php echo $user;?>/<?php echo $program;?>/<?php echo $quiz;?>/<?php echo $attempt;?>'><?php echo $quizzz->result;?></a></td>
+						<?php
+					}else
+					{
+						?>
+						<td><?php echo $quizzz->result;?></td>
+						<?php
+					}
+				?>
+				<td><?php echo $quizzz->date_taken_quiz.' GMT'; ?></td>
+				<td><a href="<?php echo base_url()?>studreport/viewexam/<?php echo $quizzz->id; ?>/<?php echo $quizzz->attempt_code; ?>/<?php echo $this->uri->segment(3); ?>/<?php echo $this->uri->segment(4); ?>">View Exam</a></td>
+				<td><?php
+                $webcamstatus=$this->programs_model->checkWebcamStatus($quizzz->pid);
+                if($webcamstatus)
+                {
+                    if($quizzz->snapfoldername !='')
+                    {
+                    ?>
+                    <a href="<?php echo base_url(); ?>studreport/viewsnap/<?php echo $quizzz->snapfoldername; ?>/<?php echo $quizzz->attempt_no; ?>/<?php echo $quizzz->attempt_code; ?>" style='text-decoration:none' class='fancybox fancybox.iframe'>View Snap</a>
+					<?php
+                    }
+                    else
+                    {
+                      echo "No";
+                    }
+                }
+                else
+                {
+                    echo "No";
+                }
+                ?></td>
+                <td>
+                	<input type="checkbox" onclick="getRadioVal('<?php echo $quizzz->id; ?>')" name="archive<?php echo $quizzz->id; ?>" id="archive<?php echo $quizzz->id; ?>" <?php if($quizzz->archive == '1') { echo 'checked';}?>  value="<?php echo $quizzz->archive; ?>" /><span id="span<?php echo $quizzz->id; ?>" style="color:green;"></span>
+
+                </td>
+			</tr>		
+		<?php
+		}
+	}
+?>
+		</tbody>
+</table>
+
+<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th colspan=2 class="text-center" style="font-size:16px;"><b>Certificate Details<b></th>
+			</tr>
+		</thead>		
+		<tbody>
+			<tr>
+				<td class="text-center">Certification Criteria</td>
+				<td><?php 
+					 $ct=$courseinfo->certificate_term;
+                    echo $certidetailarr[$ct];
+					?></td>
+			</tr>			
+			<tr>
+				<td class="text-center">Criteria Fulfilled </td>
+				<td><?php 
+
+				       if(isset($total_prcnt))
+				       {
+				          $ciel = 0;
+				       
+
+							foreach($total_prcnt as $total_prcnt)
+							{
+								$ciel += $total_prcnt; 
+							}
+							$floor = 0;
+							foreach($out_of as $out_of)
+							{
+								$floor += $out_of; 
+							}
+                       }
+						
+						@$prcntg = ($ciel/$floor )*100;
+
+						if($prcntg > '40')
+						{
+							echo $Fulfilled =  'Yes';
+						}
+						else
+						{
+							echo $Fulfilled =  'No';
+						}
+				?></td>	
+
+			
+			</tr>	
+<?php
+
+$certiStatus=$this->programs_model->checkCertificateStatus($userinfo->id,$courseinfo->id);
+//echo"<pre>";
+//print_r($coursequizinfo2);
+
+if($certiStatus)
+{
+?>
+<tr>
+<td class="text-center">Issued</td>
+<td align='left'>Yes</td>
+</tr>
+<tr>
+<td class="text-center">Issued By</td>
+<td align='left'><?php echo $this->programs_model->getUserName($certiStatus->issued_by); ?></td>
+</tr>
+<tr>
+<td class="text-center">Issued On</td>
+<td align='left'><?php echo $certiStatus->issued_on ?></td>
+</tr>
+<?php
+}
+else
+{
+	//exit("yes");
+	 $CI = & get_instance();
+	 $CI->load->model('studreport_model');
+	 $statusCerti = $CI->Studreport_model->getCompletedStatus($userinfo->id,$courseinfo->id);
+	 //print_r($statusCerti);
+
+	  if(@$courseinfo->certificate_term == @$statusCerti->certificate_term && @$statusCerti->completed == '1')
+       {
+	// if($Fulfilled == 'Yes')
+	// {
+
+		 //if($ct > 1)
+		 //{	
+?>
+<tr>
+<td></td>
+<td align='left'>
+<a href="<?php echo base_url(); ?>studreport/aprovecerti/<?php echo $userinfo->id; ?>/<?php echo $courseinfo->id; ?>" style='text-decoration:none'>Approve Certificate</a>
+</td>
+</tr>
+<?php
+		//}
+	}
+	else
+	{
+		$ct=$courseinfo->certificate_term;
+		if($ct == 3 && $coursequizinfo2)
+		{
+			if($coursequizinfo2)
+        	{
+				
+        				
+					    	?>
+
+					    	<tr>
+								<td></td>
+								<td align='left'>
+								<a href="<?php echo base_url(); ?>studreport/aprovecerti/<?php echo $userinfo->id; ?>/<?php echo $courseinfo->id; ?>" style='text-decoration:none'>Approve Certificate</a>
+								</td>
+							</tr>
+					    	<?php
+
+					    
+
+        		
+        	}
+
+		}
+
+	}
+
+}
+?>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="clearfix"></div>
+
+	<script>
+		//	(function($) {
+
+		var $ =jQuery.noConflict();
+				$(document).ready(function() {
+					var mySlidebars = new $.slidebars();
+					
+					$('.toggle-left').on('click', function() {
+						mySlidebars.toggle('left');
+					});
+					
+					$('.toggle-right').on('click', function() {
+						mySlidebars.toggle('right');
+					});
+				});
+		//	}) (jQuery);
+	</script> 
+
+
+	<script>
+	function getRadioVal(id)
+	{
+	
+		var arc_val = document.getElementById('archive'+id).value;
+
+		if(arc_val == '0')
+		{
+			document.getElementById('archive'+id).value = '1';
+		}
+		else
+		{
+			document.getElementById('archive'+id).value = '0';
+		}
+		
+
+		    $.ajax({
+            type: 'POST',
+            url: "<?php echo base_url();?>studreport/doArchive",
+            data: {'id':id,'arc_val':arc_val}, 
+            success: function(response) 
+			{
+                
+				
+				if(response =='archived')
+				{
+					
+				$("#span"+id).html('archived');
+				setTimeout(
+						function() 
+						{
+							
+						$("#span"+id).slideUp('slow');
+
+						}, 2500);
+				$("#span"+id).show();
+			}
+			else
+			{
+				
+				$("#span"+id).html('Unarchived');
+				setTimeout(
+						function() 
+						{
+							
+						$("#span"+id).slideUp('slow');
+
+						}, 2500);
+				$("#span"+id).show();
+			}
+			}
+		});
+
+
+	}
+</script>

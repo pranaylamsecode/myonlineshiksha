@@ -1,0 +1,208 @@
+#myModalLectpreview .full-width{
+  width: 80%;
+}
+#myModalLectpreview .drag, #myModalLectpreview .configuration, #myModalLectpreview .remove, #myModalLectpreview .clone {
+    display: none;
+}
+#myModalLectpreview .mock{
+  display: none;
+}
+#myModalLectpreview select[name='Alignment'] { 
+    display: none;
+}
+#myModalLectpreview .preview {
+    display: none !important;
+}
+ #myModalLectpreview .box, #myModalLectpreview .row {
+    padding-top: 0;
+    border: none;
+    background: none !important;
+}
+#myModalLectpreview .lyrow.ui-draggable .view .row .col-md-12 .box-element .view iframe.img-responsive{
+	height: 480px;
+}
+#myModalLectpreview .w130 {
+  line-height: 1.5;
+}
+
+#myModalLectpreview .htmlpage:after{
+	display: none !important;
+}
+#myModalLectpreview .htmlpage{
+  padding-top: 0;
+  border: none;
+}
+#myModalLectpreview .row .clearfix{
+  border: none;
+  padding-top: 0;
+}
+#myModalLectpreview .ui-sortable:after{
+  display: none;
+
+}
+#myModalLectpreview .ui-sortable{
+    border: none;
+  padding-top: 0;
+}
+#myModalLectpreview .htmlpage .box .view {
+    display: block;
+    padding: 0;
+}
+#myModalLectpreview .modal-header{
+  text-align: center;
+}
+#myModalLectpreview .view{
+  width: 100% !important;
+  float: none;
+}
+#myModalLectpreview .element-purple-bg{
+  background-color: white;
+  border: none;
+}
+#myModalLectpreview .element-blue-bg{
+  background-color: white;
+  border: none;
+}
+#myModalLectpreview .element-green-bg{
+  background-color: white;
+  border: none;
+}
+#myModalLectpreview .box{
+  margin-top: -55px !important;
+    margin-bottom: -68px;
+}
+
+div#myModalLectpreview1 {
+ position: fixed;
+ left: 10%!important;
+ max-width: 80%!important;
+ margin: 0px auto!important;
+ width: 100%!important;
+ z-index: 999999!important;
+ outline: 0;
+ top: 4%!important;
+} 
+#myModalLectpreview1 .modal-title {
+height: 0px!important;
+background-color: transparent!important;
+padding-top: 0px!important;
+}
+#myModalLectpreview1 .drag, #myModalLectpreview1 .configuration, #myModalLectpreview1 .remove, #myModalLectpreview1 .clone {
+    display: none;
+}
+#myModalLectpreview1 .mock{
+  display: none;
+}
+#myModalLectpreview1 select[name='Alignment'] { 
+    display: none;
+}
+#myModalLectpreview1 .preview {
+    display: none !important;
+}
+ #myModalLectpreview1 .box, #myModalLectpreview1 .row {
+    padding-top: 0;
+    border: none;
+    background: none !important;
+}
+#myModalLectpreview1 .lyrow.ui-draggable .view .row .col-md-12 .box-element .view iframe.img-responsive{
+  height: 480px;
+}
+#myModalLectpreview1 .w130 {
+  line-height: 1.5;
+}
+
+#myModalLectpreview1 .htmlpage:after{
+  display: none !important;
+}
+#myModalLectpreview1 .htmlpage{
+  padding-top: 0;
+  border: none;
+}
+#myModalLectpreview1 .row .clearfix{
+  border: none;
+  padding-top: 0;
+}
+#myModalLectpreview1 .ui-sortable:after{
+  display: none;
+
+}
+#myModalLectpreview1 .ui-sortable{
+    border: none;
+  padding-top: 0;
+}
+#myModalLectpreview1 .htmlpage .box .view {
+    display: block;
+    padding: 0;
+    width: 100% !important; 
+}
+#myModalLectpreview1 .modal-header{
+  text-align: center;
+}
+#myModalLectpreview1.view{
+  width: 100% !important;
+  float: none;
+}
+#myModalLectpreview1 .element-purple-bg{
+  background-color: white !important;
+  border: none;
+}
+#myModalLectpreview1 .element-blue-bg{
+  background-color: white !important;
+  border: none;
+}
+#myModalLectpreview1 .element-green-bg{
+  background-color: white !important;
+  border: none;
+}
+#myModalLectpreview1 .box{
+  margin-top: -55px !important;
+    margin-bottom: -68px;
+}
+#myModalLectpreview1 p {
+  font-family: 'AvenirNextLTPro-Regular';
+  font-weight: 400;
+  font-size: 14px;
+  color: #5a5a5a;
+}
+#myModalLectpreview1 .htmlpage.ui-sortable.dragdroplayout {
+height: 100%;
+ min-height: 400px!important;
+ max-height: 400px;
+ overflow: auto;
+}
+#myModalLectpreview .htmlpage.ui-sortable {
+  height: 100%;
+  min-height: 400px!important;
+  max-height: 400px;
+  overflow: auto;
+}
+
+#myModalLectpreview .dragdroplayout, #myModalLectpreview1 .dragdroplayout
+{
+  background: none;
+}
+
+#myModalLectpreview1 .row.clearfix.right-main-content
+{
+  box-shadow: none;
+}
+#myModalLectpreview1 .modal-title {
+ height: 1px!important;
+ background-color: transparent!important;
+ padding-top: 0px!important;
+}
+#myModalLectpreview1 .dragelement, #myModalLectpreview .dragelement{
+    background: none;
+}
+#myModalLectpreview .row.clearfix, #myModalLectpreview1 .row.clearfix{
+  box-shadow: none;
+  width: 100%;
+
+}
+#myModalLectpreview .view, #myModalLectpreview1 .view{
+  width: 100% !important;
+
+}
+#myModalLectpreview1 .element-view-content .view, #myModalLectpreview1 .element-view-content .view{
+  width: 100% !important;
+}

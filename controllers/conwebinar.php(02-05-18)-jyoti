@@ -1,0 +1,233 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class ConWebinar extends MLMS_Controller {
+	function __construct()	{		parent::__construct();		$this->template->set_layout('frontend');        $this->load->helper('cookie');		$this->load->model('webinars_model');		$this->load->model('admin/settings_model');
+		$this->load->helper('date');		$this->load->config('features_config');	}
+		
+	public function index($pro_id = NULL)
+	{
+	   	// $tmpl = $this->configarr[0]['layout_template'];
+	   	// $this->template->set("tmpl",$tmpl);
+
+		$sessionarray = $this->session->userdata('logged_in');
+		if($this->session->userdata('logged_in')){
+		$user_id = $sessionarray['id'];
+		//$group_id = $sessionarray['groupid'];
+		if($this->input->post('progid'))		{
+			$username = $this->input->post('ufname');
+			$progid = $this->input->post('progid');
+			$webinarid = $this->input->post('webinarid');
+			$postarray = array('progid' =>$progid, 'webinarid' =>$webinarid );
+			$this->session->set_userdata('webinarpost',$postarray);
+		}
+		
+		$webinarpost = $this->session->userdata('webinarpost');	
+		$progid = $webinarpost['progid'];	
+		$webinarid = $webinarpost['webinarid'];	
+		$this->load->model('Program_model');	
+		$this->load->model('myinfo_model');	
+		$webinar = $this->config->item('webinar');       
+		/*date time area*/			
+		$datestring = "%Y-%m-%d %h:%i%a";				$time = time();		$timezone = new DateTimeZone("Asia/Kolkata" );		$date = new DateTime();		$date->setTimezone($timezone);		$currdate1 = $date->format( 'Y-m-d' );					$currtime1 = $date->format( 'h:ia' );		$currdateandtime = $date->format( 'Y-m-d h:ia' );		
+		//date('Y-m-d h:ia');		//$current_date_string = mdate($datestring, $time);		//$current_date_string = date('Y-m-d h:ia');		//$current_date_string = $currdate1.' '.$currtime1;		//$current_date_int = strtotime($currdateandtime);
+		$current_date_int = strtotime(date('Y-m-d h:ia'));			
+		$webinarobj = $this->webinars_model->getWebinar($progid,$webinarid);
+		
+		
+		$webinarfromdateint = strtotime($webinarobj->fromdate.' '.$webinarobj->fromtime);		
+		//$webinartodateint = strtotime($webinarobj->todate.' '.$webinarobj->totime);
+		$webinartodateint = '';		
+		/*date time area*/		
+		if(!isset($progid) && $progid == '')	
+		{	      	redirect('category');	    }				
+		
+		$configarr = $this->settings_model->getItems();	
+		$this->configarr = $configarr;	
+		$this->template->set_layout($configarr[0]['layout_template']);	
+		$tmpl = $this->configarr[0]['layout_template'];	
+		$this->template->set("tmpl", $tmpl);	
+		$program = $this->Program_model->getProgram($progid);
+	
+		if(isset($user_id))
+		{
+			/* features settings */
+			if($webinar['status']==FALSE)			{
+				redirect('index');
+			}			else			{		
+				/*if($webinar['limited_meetings']){
+				$meetings_limit = $webinar['meetings_permonth'];
+				$current_month;
+				}
+				if($webinar['limited_classes']){
+				$meetings_limit = $webinar['classes_permonth'];
+				}*/
+		    }
+	   /* features settings */
+			$userdetail = $this->myinfo_model->getUser($user_id);	
+			//$uroomid=$program->roomid;	
+			//$uroomid=1123;	
+			$grpid=$userdetail->group_id;
+			if($grpid==1)
+            $ishost=0;
+			else
+            $ishost=1;
+			$useremail=$userdetail->email;	
+			$userfname=$userdetail->first_name;	
+			$userlname=$userdetail->last_name;	
+			$uname=$userdetail->username;	
+			$webstatus=$userdetail->webstatus;
+			if($program->webstatus=='active')
+			{
+				if($this->Program_model->checkEnrolled($user_id,$progid))
+				{
+					$uroomid="16960";
+					$studwebinar=null;
+					if(($current_date_int>=$webinarfromdateint)&&($current_date_int<=$webinartodateint))
+					{
+					  //$studwebinar=$this->addStudent($uroomid,$userfname,$useremail,$ishost,$webinarid,$progid);
+					}
+					//$studwebinar=$this->addEvent($uroomid,$userfname,$useremail,$progid,$ishost);
+                }
+				else
+				{
+					$studwebinar="";
+				}
+			}
+			else
+			{
+				$studwebinar="";
+			}
+			//$studwebinar=$this->addStudent($uroomid,$userfname,$useremail);
+		}
+		else
+		{	
+			$useremail='';
+			$userfname='';
+			$userlname='';
+			$uname='';
+			$webstatus='';	
+			$studwebinar='';
+		}
+
+
+			$this->template->set("progid",$progid);
+			
+			
+		  
+			 $dbname = $this->db->database;  
+	  
+	       $db_uname = substr($dbname,0,-7);
+		   
+		   if($this->input->get('msg'))
+	   {
+	   	//$this->load->view('template/classic/header');
+			$this->template->build('programs/viewwebinar');
+	   }
+			
+			require_once("WiZiQ/WiZiQ.Class/WiZiQService_addAttendee.php");
+			
+			
+			
+			
+           	$webinarobj = $this->webinars_model->getWebinar($progid,$webinarid);				
+			$this->template->set("webinarinfo",$webinarobj);			
+			
+			
+			$this->template->set("addstudresponse",$studwebinar);
+          		//$this->load->view('template/classic/header');		
+			$this->template->build('programs/viewwebinar');
+		}		
+		else		
+		{
+			$this->template->build('user/login');
+        }      
+	}
+
+    function addStudent($roomid,$firstname,$email,$ishost,$webinarid,$pro_id)
+    {
+        $this->load->helper('unirowclient');
+        $apikey = "4baf11ac9f3ab7e326b8ff1e48887ffa";
+        $domain = "sailorsclub.unirow.com";
+        $username = "sailorsclub";
+        $password = "sailorsclub@2013";
+
+       $unirowclient = new unirowClient;
+       $unirowclient->connect($username,$password, $domain, $apikey);
+
+        $title ="Welcome to VeerIT";
+        $redirectURL=base_url()."programs/programs/".$pro_id;
+        //meeting Id
+        $id = $webinarid;
+
+        // select the mode you want to start the session =>
+        // mode is webinar for learning session
+
+        $mode = "webinar";
+
+        $ishost = $ishost;   // 0 for student
+
+
+        $startrecording = "0";
+
+        //if deduplicate is set to 1 single user can enter from 2 computers.
+        $deduplicate = "1";
+
+        //external user id to check if the user already exists in the session
+		$rand = rand(1, 9);
+        $ext_user_id = "10".$rand;
+
+        $student = $unirowclient->addUserToRoom($ext_user_id, $firstname, $email, $ishost, $roomid, $id, $title, $redirectURL,$mode, $startrecording, $deduplicate);
+
+        //$this->template->set("stud", $student);
+       return $student;
+
+      // return $title;
+    }
+function eventresponse(){
+print_r($_REQUEST);
+
+}
+function addEvent($roomid,$firstname,$email,$pro_id,$ishost)
+    {
+        $this->load->helper('unirowclient');
+        $apikey = "4baf11ac9f3ab7e326b8ff1e48887ffa";
+        $domain = "sailorsclub.unirow.com";
+        $username = "sailorsclub";
+        $password = "sailorsclub@2013";
+
+       $unirowclient = new unirowClient;
+       $unirowclient->connect($username,$password, $domain, $apikey);
+
+        $meeting_title ="Welcome to VeerIT";
+        $redirectURL=base_url()."conwebinar/eventresponse/";
+        //meeting Id
+        $meeting_id = $pro_id;
+
+        // select the mode you want to start the session =>
+        // mode is webinar for learning session
+
+        $mode = "webinar";
+
+        $ishost = $ishost;   // 0 for student
+        //$ishost = 1;   // 0 for student
+
+
+        $startrecording = "0";
+
+        //if deduplicate is set to 1 single user can enter from 2 computers.
+        $deduplicate = "1";
+
+        //external user id to check if the user already exists in the session
+        $ext_user_id = "100";
+
+        //$student = $unirowclient->addUserToRoom($ext_user_id, $firstname, $email, $ishost, $roomid, $id, $title, $redirectURL,$mode, $startrecording, $deduplicate);
+		$unirowclient->addEventUserToRoom($firstname, $email, $ishost, $roomid, $meeting_id, $meeting_title, $redirectURL);
+
+        //$this->template->set("stud", $student);
+      return $student;
+       //return $unirowclient->getRooms();
+
+      // return $title;
+    }
+
+}
+?>

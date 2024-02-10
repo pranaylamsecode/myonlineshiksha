@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<options>
+	<fieldset name="page_setting">
+		<field name="slider_showhide" type="select" label="Slider ">
+			<option value="true" text="SHOW"/>	
+			<option value="false" text="HIDE"/>
+		</field>
+		
+		<field name="banner_showhide" type="select" label="Banner Show/Hide">
+			<option value="true" text="SHOW"/>	
+			<option value="false" text="HIDE"/>
+		</field>
+
+		<field name="banner_setting" type="select" label="Show Banner Assignment">
+			<option value="homepage" text="Only On Home Page"/>	
+			<option value="allpage" text="On All Page"/>
+		</field>
+		
+		<field name="aboutusinfotext_showhide" type="select" label="About Info Text: Show/Hide">
+			<option value="true" text="SHOW"/>	
+			<option value="false" text="HIDE"/>
+		</field>
+		
+		<!--<field name="topbarloginregister_showhide" type="select" label="Top Bar Login/Register">
+			<option value="left" text="LEFT"/>	
+			<option value="right" text="RIGHT"/>
+		</field>-->
+		
+		<field name="heading_searchbar" type="select" label="Heading Menu">
+			<option value="left" text="LEFT"/>	
+			<option value="right" text="RIGHT"/>
+		</field>
+		
+		<field name="searchbox_showhide" type="select" label="Header Search Box: Show/Hide">
+			<option value="true" text="SHOW"/>	
+			<option value="false" text="HIDE"/>
+		</field>
+
+		<field name="course_showhide" type="select" label="Courses Show/Hide">
+			<option value="true" text="SHOW"/>	
+			<option value="false" text="HIDE"/>
+		</field>
+		
+		<field name="course_heading" type="text" placeholder="Enter first slide heading." label="Course Heading" />
+		
+
+		<field name="news_letter" type="select" label="News Letter Show/Hide">
+			<option value="true" text="SHOW"/>	
+			<option value="false" text="HIDE"/>
+		</field>	
+
+		<field name="news_letter_heading" type="text" placeholder="Enter News Letter Heading." label="News Letter Heading" />
+		<field name="news_letter_content" type="text" placeholder="Enter News Letter Content." label="News Letter Content" />
+		
+		<field name="copyright" type="select" label="Copyright Text Show/Hide">
+			<option value="true" text="SHOW"/>	
+			<option value="false" text="HIDE"/>
+		</field>	
+	</fieldset>
+	
+	<fieldset name="slider">
+		  
+		<field name="slide_heading1" type="text" placeholder="Enter first slide heading." label="Heading" />
+		<field name="slide_containt1" type="textarea" editor="true" placeholder="Enter first slide containt." value="placeholder" rule="required" label="Content" />
+		<field name="slide_image1" type="file" label="Image" />
+
+		<field name="slide_heading2" type="text" placeholder="Enter second slide heading." label="Heading" />
+		<field name="slide_containt2" type="textarea" editor="true" placeholder="Enter second slide containt." value="placeholder" rule="required" label="Content" />
+		<field name="slide_image2" type="file" label="Image" />
+
+		<field name="slide_heading3" type="text" placeholder="Enter third slide heading." label="Heading" />
+		<field name="slide_containt3" type="textarea" editor="true" placeholder="Enter third slide containt." value="placeholder" rule="required" label="Content" />
+		<field name="slide_image3" type="file" label="Image" />
+
+		<field name="slide_heading4" type="text" placeholder="Enter fourth slide heading." label="Heading" />		
+		<field name="slide_containt4" type="textarea" editor="true" placeholder="Enter fourth slide containt." value="placeholder" rule="required" label="Content" />		
+		<field name="slide_image4" type="file" label="Image" />
+				
+		<field name="slider_aoutoplay" type="select" label="Slider Auto Play">
+			<option value="true" text="ON"/>	
+			<option value="false" text="OFF"/>
+		</field>
+		
+		<field name="slide_interval" type="text" placeholder="Enter Slide Interval." label="Slide Interval(In Mili-Seconds)" />
+		
+		<field name="bg_image4" type="file" label="Select Background Image" />
+		<!--<field name="slider_heading_color" type="select" color="true" label="Select Theme" >
+			<option value="FCFCFC" text="Dark"/>	
+			<option value="EEEEEE" text="Light"/>
+		</field>-->
+		
+		<field name="slider_desc_color" type="text" color="true" label="Select Slider Description Color" />
+		<field name="slider_color" type="text" color="true" label="Select Slider Color" />
+
+
+		
+		
+	</fieldset>
+
+	<fieldset name="position_of_pages">
+		<field name="middle_content" type="text" tooltip="Enter the comma seperated ID for middle pages." placeholder="Pages For Middle Position" label="Pages For Middle Position (Content Below The Banner / Slider)" />
+
+		<field name="middle_content_above_footer" type="text" tooltip="Enter the comma seperated ID for middle pages." placeholder="Pages For Middle Position" label="Pages For Middle Position (Content For Above The Footer)" />
+
+		<field name="footer_content" type="text" token="pages" tooltip="Enter the comma seperated ID for footer pages." placeholder="Pages For Footer Position" label="Pages For Footer Position" />
+	</fieldset> 
+</options>
